@@ -1,21 +1,15 @@
 import React from 'react';
+import s from './Profile.module.css';
+import MyPosts from './MyPosts/MyPosts';
 
 function Profile() {
     return (
-        <main className='content'>
+        <main className={s.content}>
             <img src='https://www.optomaeurope.com/images/ProductApplicationFeatures/4kuhd/banner.jpg' />
             <div>
                 avatar + description
             </div>
-            <div>
-                My posts
-                <div>
-                    New post
-                </div>
-                <div>
-                    post 1
-                </div>
-            </div>
+            <MyPosts />
         </main>
     );
 }
