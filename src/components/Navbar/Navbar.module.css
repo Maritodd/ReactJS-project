@@ -1,4 +1,14 @@
 .navbar {
     grid-area: navbar;
     background-color: blueviolet;
+    padding: 25px;
   }
+
+.item a{
+  color: white;
+  text-decoration: none;
+}
+
+.item .activeLink {
+  color: black;
+}

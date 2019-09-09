@@ -4,7 +4,7 @@ import MyPosts from './MyPosts/MyPosts';
 
 function Profile() {
     return (
-        <main className={s.content}>
+        <main>
             <img src='https://www.optomaeurope.com/images/ProductApplicationFeatures/4kuhd/banner.jpg' />
             <div>
                 avatar + description
