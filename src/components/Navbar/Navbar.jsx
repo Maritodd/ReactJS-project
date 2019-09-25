@@ -1,24 +1,30 @@
 import React from 'react';
 import s from './Navbar.module.css';
 import {NavLink} from 'react-router-dom';
+import Friends from './Friends/Friends'
 
-function Navbar() {
+function Navbar(props) {
+    let friendsElement = props.state.friends.map(d => <Friends name={d.name} id={d.id} />);
     return (
         <nav className={s.navbar}>
             <div className={s.item}>
                 <NavLink to='/profile' activeClassName={s.activeLink}>Profile</NavLink>
             </div>
             <div className={s.item}>
-                <NavLink to='/dialogs'>Messege</NavLink>
+                <NavLink to='/dialogs' activeClassName={s.activeLink}>Messege</NavLink>
             </div>
             <div className={s.item}>
-                <NavLink to='/news'>News</NavLink>
+                <NavLink to='/news' activeClassName={s.activeLink}>News</NavLink>
             </div>
             <div className={s.item}>
-                <NavLink to='/music'>Music</NavLink>
+                <NavLink to='/music' activeClassName={s.activeLink}>Music</NavLink>
             </div>
             <div className={s.item}>
-                <NavLink to='/settings'>Settings</NavLink>
+                <NavLink to='/settings' activeClassName={s.activeLink}>Settings</NavLink>
+            </div>
+            <div>
+                <span>Friends</span>
+               {friendsElement}
             </div>
         </nav>
     );

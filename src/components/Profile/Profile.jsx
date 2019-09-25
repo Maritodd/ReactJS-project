@@ -1,15 +1,14 @@
 import React from 'react';
 import s from './Profile.module.css';
 import MyPosts from './MyPosts/MyPosts';
+import ProfileInfo from './ProfileInfo/ProfileInfo';
 
-function Profile() {
+function Profile(props) {
+
     return (
         <main>
-            <img src='https://www.optomaeurope.com/images/ProductApplicationFeatures/4kuhd/banner.jpg' />
-            <div>
-                avatar + description
-            </div>
-            <MyPosts />
+            <ProfileInfo />
+            <MyPosts posts={props.state.posts} addPost={props.addPost}/>
         </main>
     );
 }

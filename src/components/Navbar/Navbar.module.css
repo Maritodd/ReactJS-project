@@ -1,6 +1,6 @@
 .navbar {
     grid-area: navbar;
-    background-color: blueviolet;
+    background-color: #d48166;
     padding: 25px;
   }
 
@@ -11,4 +11,28 @@
 
 .item .activeLink {
   color: black;
+}
+
+.dialogsItem {
+  text-decoration: none;
+  color: rgb(255, 255, 255);
+  font-size: 18px;
+  transition: .5s ease-in;
+}
+
+.dialogsItem:active {
+  color: aqua;
+  transition: .1s ease-in;
+}
+
+.dialog img {
+  width: 22%;
+  border-radius: 13px;
+  padding: 5px;
+}
+
+.dialogBlock {
+  display: flex;
+  align-items: center;
+  padding: 5px;
 }
