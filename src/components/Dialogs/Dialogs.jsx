@@ -3,16 +3,23 @@ import s from './Dialogs.module.css';
 import { NavLink } from 'react-router-dom';
 import DialogItem from './DialogItem/DialogItem.jsx'
 import MessageItem from './MessageItem/MessageItem.jsx'
+import { sendMessageCreator, updateNewMessageCreator } from '../../redux/state';
 
 function Dialogs(props) {
-    let dialogsElement = props.state.dialogs.map(d => <DialogItem name={d.name} id={d.id} />);
-    let messagesElement = props.state.messages.map(m => <MessageItem message={m.message} id={m.id} />);
+    
+    let state = props.store.getState().dialogsPage;
 
-    let newElementMail = React.createRef();
+    let dialogsElement = state.dialogs.map(d => <DialogItem name={d.name} id={d.id} />);
+    let messagesElement = state.messages.map(m => <MessageItem message={m.message} id={m.id} />);
+    let newMessageBody = state.newMessageBody;
+    
+    let onSendMessageClick = () => {
+        props.store.dispatch(sendMessageCreator());
+    }
 
-    let sendMail = () => {
-        let text = newElementMail.current.value;
-        alert(text);
+    let onNewMessageUpdate = (e) => {
+        let body = e.target.value;
+        props.store.dispatch( updateNewMessageCreator(body));
     }
 
     return (
@@ -21,10 +28,13 @@ function Dialogs(props) {
                 {dialogsElement}
             </div>
             <div className={s.messages}>
-                {messagesElement}
-
-                <textarea ref={newElementMail}>32</textarea>
-                <button onClick={sendMail}>Send</button>
+                <div>{messagesElement}</div>
+                <div>
+                    <textarea onChange={onNewMessageUpdate} value={newMessageBody} placeholder="Enter your message..."></textarea>
+                </div>
+                <div>
+                    <button onClick={onSendMessageClick}>Send</button>
+                </div>
             </div>
         </div>
     );

@@ -1,6 +1,7 @@
 import React from 'react';
 import s from './MyPosts.module.css';
 import Post from './Post/Post';
+import { addPostActionCreator, updateNewPostChangeCreator } from '../../../redux/state';
 
 function MyPosts(props) {
 
@@ -9,16 +10,19 @@ function MyPosts(props) {
     let newElementPost = React.createRef();
 
     let addPost = () => {
-debugger;
+        props.dispatch(addPostActionCreator());
+    }
+
+    let onPostChange = () => {
         let text = newElementPost.current.value;
-        props.addPost(text);
+        props.dispatch(updateNewPostChangeCreator(text));
     }
 
     return (
         <main className={s.content}>
             <div>
                 <div>
-                    <textarea ref={newElementPost}>Write your post...</textarea>
+                    <textarea onChange={onPostChange} ref={newElementPost} value={props.newPostText} />
                 </div>
                 <div>
                     <button onClick={addPost}>Add Post</button>
