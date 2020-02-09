@@ -1,22 +1,23 @@
 import React from 'react';
 import {connect} from "react-redux";
 import {
-    followAC,
-    loaderIsFetchingAC,
-    setCurrentPageAC,
-    setTotalCountAC,
-    setUsersAC,
-    unfollowAC
+    follow,
+    loaderIsFetching,
+    setCurrentPage,
+    setTotalCount,
+    setUsers,
+    unfollow
 } from "../../redux/users-reducer";
 import * as axios from "axios";
 import Users from "./Users";
-import preloader from '../../assets/images/preloader.svg'
 import Preloader from "../common/Preloader/Preloader";
 
-class UsersAPI extends React.Component {
+class UsersContainer extends React.Component {
     componentDidMount() {
         this.props.loaderIsFetching(true);
-        axios.get(`https://social-network.samuraijs.com/api/1.0/users?page=${this.props.currentPage}&count=${this.props.pageSize}`)
+        axios.get(`https://social-network.samuraijs.com/api/1.0/users?page=${this.props.currentPage}&count=${this.props.pageSize}`, {
+            withCredentials: true
+        })
             .then(response => {
                 this.props.loaderIsFetching(false);
                 this.props.setUsers(response.data.items);
@@ -27,7 +28,9 @@ class UsersAPI extends React.Component {
     onPageChanged = (pageNumber) => {
         this.props.setCurrentPage(pageNumber);
         this.props.loaderIsFetching(true);
-        axios.get(`https://social-network.samuraijs.com/api/1.0/users?page=${pageNumber}&count=${this.props.pageSize}`)
+        axios.get(`https://social-network.samuraijs.com/api/1.0/users?page=${pageNumber}&count=${this.props.pageSize}`, {
+            withCredentials: true
+        })
             .then(response => {
                 this.props.loaderIsFetching(false);
                 this.props.setUsers(response.data.items)
@@ -59,29 +62,6 @@ let mapStateToProps = (state) => {
     }
 };
 
-let mapDispatchToProps = (dispatch) => {
-    return {
-        follow: (userId) => {
-            dispatch(followAC(userId));
-        },
-        unfollow: (userId) => {
-            dispatch(unfollowAC(userId));
-        },
-        setUsers: (users) => {
-            dispatch(setUsersAC(users));
-        },
-        setCurrentPage: (pageNumber) => {
-            dispatch(setCurrentPageAC(pageNumber));
-        },
-        setTotalCount: (totalCount) => {
-            dispatch(setTotalCountAC(totalCount));
-        },
-        loaderIsFetching: (isFetching) => {
-            dispatch(loaderIsFetchingAC(isFetching));
-        }
-    }
-};
 
-const UsersContainer = connect(mapStateToProps, mapDispatchToProps)(UsersAPI);
-
-export default UsersContainer;
+export default connect(mapStateToProps,
+    { follow, unfollow, setUsers, setCurrentPage, setTotalCount, loaderIsFetching })(UsersContainer);
