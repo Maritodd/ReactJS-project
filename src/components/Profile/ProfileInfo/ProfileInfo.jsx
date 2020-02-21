@@ -1,6 +1,8 @@
 import React from 'react';
 import s from './ProfileInfo.module.css';
 import Preloader from "../../common/Preloader/Preloader";
+import userImg from "../../../assets/images/img.png";
+import ProfileStatus from "./ProfileStatus";
 
 function ProfileInfo(props) {
     if (!props.profile) {
@@ -9,11 +11,11 @@ function ProfileInfo(props) {
 
     return (
         <main>
-            <img src='https://www.optomaeurope.com/images/ProductApplicationFeatures/4kuhd/banner.jpg' />
             <div className={s.content}>
                 <div>
-                    <img src={props.profile.photos.large} />
+                    <img src={props.profile.photos.large != null ? props.profile.photos.large : userImg} />
                 </div>
+                <ProfileStatus status={props.status} updateUserStatus={props.updateUserStatus}/>
                 <div>{props.profile.aboutMe}</div>
                 <div>{props.profile.lookingForAJobDescription}</div>
                 <div><a href={props.profile.contacts.facebook} target="_blank">FACEBOOK</a></div>

@@ -9,10 +9,8 @@ const mapStateToProps = (state) => {
     return {
         sidebar: state.sidebar
     }
-}
+};
 
-const mapDispatchToProps = () => {}
-
-const NavbarContainer = connect(mapStateToProps, mapDispatchToProps) (Navbar);
+const NavbarContainer = connect(mapStateToProps) (Navbar);
 
 export default NavbarContainer;
